@@ -14,6 +14,13 @@ A production-ready, enterprise-grade React Native + TypeScript application demon
 - ✅ **Testing**: Jest + React Native Testing Library
 - ✅ **Environment Config**: Configurable API endpoints
 
+## Demo
+
+<div align="center">
+  <img src="docs/screenshots/feed-screen.png" alt="Feed Screen" width="300" />
+  <img src="docs/screenshots/detail-screen.png" alt="Detail Screen" width="300" />
+</div>
+
 ## Quick Start
 
 ### Prerequisites
@@ -71,32 +78,6 @@ npm run test:watch
 npm run test:coverage
 ```
 
-### Manual Testing Checklist
-
-#### Feed Screen
-- [ ] Posts list loads and displays correctly
-- [ ] Pull-to-refresh fetches fresh data
-- [ ] Tap on post navigates to detail
-- [ ] Smooth scrolling (no lag with 100 posts)
-- [ ] Loading spinner shows while fetching
-
-#### Detail Screen
-- [ ] Post title and body display correctly
-- [ ] Comments load and display below post
-- [ ] Back navigation works
-- [ ] Error state shows if post not found
-- [ ] Retry works for failed comment loads
-
-#### Error Handling
-- [ ] Network errors show user-friendly messages
-- [ ] Retry button attempts to reload data
-- [ ] Error Boundary catches React errors
-
-#### Accessibility
-- [ ] Screen reader announces all interactive elements
-- [ ] All buttons have descriptive labels
-- [ ] Loading states are announced
-
 ## Project Structure
 
 ```
@@ -117,29 +98,6 @@ src/
 __tests__/               # Jest tests
 ```
 
-### Why Feature-Based Architecture?
-
-**Before (by type):**
-```
-src/
-├── components/  # All components mixed
-├── screens/     # All screens mixed
-└── hooks/       # All hooks mixed
-```
-❌ Hard to find related code
-❌ Doesn't scale
-❌ Cross-cutting concerns
-
-**After (by feature):**
-```
-src/
-└── features/
-    └── posts/   # Everything posts-related in one place
-```
-✅ Easy to locate code
-✅ Scales infinitely
-✅ Clear boundaries
-
 ## Key Implementation Details
 
 ### Data Layer (React Query)
@@ -157,24 +115,6 @@ retryDelay: exponential  // 1s → 2s → 4s (max 30s)
 staleTime: 5min         // Data fresh for 5 minutes
 gcTime: 10min           // Cache kept for 10 minutes
 ```
-
-### Performance Optimizations
-
-**FlatList:**
-- `getItemLayout`: Fixed height (96px) for instant scroll calculations
-- `removeClippedSubviews`: Unmounts off-screen items
-- `maxToRenderPerBatch={10}`: Smooth rendering
-- `windowSize={11}`: Memory optimization
-
-**Memoization:**
-- `React.memo` on all list items
-- `useCallback` for stable function references
-- `displayName` for better debugging
-
-**Prefetching:**
-- Triggers on `onPressIn` (before actual press)
-- Prefetches both post and comments
-- Instant navigation experience
 
 ### Error Handling
 
@@ -260,8 +200,3 @@ npm test -- --no-cache
 ## License
 
 MIT
-
----
-
-**Built with enterprise best practices:**
-Feature-based architecture • Type safety • Accessibility • Performance • Testing • Error handling
